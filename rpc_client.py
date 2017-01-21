@@ -2,12 +2,19 @@
 import pika
 import uuid
 import time
+import os
 
 class FibonacciRpcClient(object):
     def __init__(self):
+        credentials = pika.PlainCredentials(
+            username=os.environ['RABBITMQ_DEFAULT_USER'],
+            password=os.environ['RABBITMQ_DEFAULT_PASS']
+        )
+
         self.connection = pika.BlockingConnection(
             pika.ConnectionParameters(
-                host='rabbitmq'
+                host='rabbitmq',
+                credentials=credentials
             )
         )
 
@@ -47,10 +54,11 @@ class FibonacciRpcClient(object):
 
 fibonacci_rpc = FibonacciRpcClient()
 
-print(" Waiting 5 seconds to start...")
-time.sleep(5)
+while True:
+    print(" Waiting 5 seconds to start...")
+    time.sleep(5)
 
-for n in range(1, 10001):
-    print(" [x] Requesting fib(%r)" % n)
-    response = fibonacci_rpc.call(n)
-    print(" [.] Got %r" % response)
+    for n in range(1, 1001):
+        print(" [x] Requesting fib(%r)" % n)
+        response = fibonacci_rpc.call(n)
+        print(" [.] Got %r" % response)

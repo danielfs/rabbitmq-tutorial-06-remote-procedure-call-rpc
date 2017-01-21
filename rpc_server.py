@@ -1,10 +1,17 @@
 #!/usr/bin/env python
 import pika
+import os
 from fastfibonacci.fastfibonacci import fibonacci
+
+credentials = pika.PlainCredentials(
+    username=os.environ['RABBITMQ_DEFAULT_USER'],
+    password=os.environ['RABBITMQ_DEFAULT_PASS']
+)
 
 connection = pika.BlockingConnection(
     pika.ConnectionParameters(
-        host='rabbitmq'
+        host='rabbitmq',
+        credentials=credentials
     )
 )
 
