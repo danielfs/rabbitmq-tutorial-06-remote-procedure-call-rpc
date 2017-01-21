@@ -9,5 +9,5 @@ build:
 
 integrations:
   hub:
-    - integrationName: IntegracaoComDockerHub
-      type: hub
+    - integrationName: IntegracaoDaContaComODockerHub
+      type: docker
