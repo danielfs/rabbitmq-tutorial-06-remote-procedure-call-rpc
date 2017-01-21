@@ -1,5 +1,5 @@
 build:
-	echo "Build"
+	@bash build.sh
 
 push:
-	echo "Push"
+	@bash push.sh
