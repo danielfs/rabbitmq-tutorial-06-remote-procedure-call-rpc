@@ -1,5 +1,5 @@
 build:
-    echo "Build"
+	echo "Build"
 
 push:
-    echo "Push"
+	echo "Push"
