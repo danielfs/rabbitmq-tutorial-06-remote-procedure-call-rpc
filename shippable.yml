@@ -1,0 +1,13 @@
+language: none
+
+build:
+  ci:
+    - if [ "$IS_PULL_REQUEST" == false ]; then make build; fi
+
+  post_ci:
+    - if [ "$IS_PULL_REQUEST" == false ]; then make push; fi
+
+integrations:
+  hub:
+    - integrationName: IntegracaoComDockerHub
+      type: hub
